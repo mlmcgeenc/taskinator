@@ -139,8 +139,21 @@ var completeEditTask = function (taskName, taskType, taskId) {
 };
 
 var taskStatusChangeHandler = function (event) {
-	console.log(event.target);
-	console.log(event.target.getAttribute("data-task-id"));
+	var taskId = event.target.dataset["taskId"];
+	var statusValue = event.target.value.toLowerCase();
+	var taskSelected = document.querySelector(
+		".task-item[data-task-id='" + taskId + "']"
+	);
+
+	console.log(taskSelected);
+
+	if (statusValue === "to do") {
+		tasksToDoEl.appendChild(taskSelected);
+	} else if (statusValue === "in progress") {
+		tasksInProgressEl.appendChild(taskSelected);
+	} else if (statusValue === "completed") {
+		tasksCompletedEl.appendChild(taskSelected);
+	}
 };
 
 pageContentEl.addEventListener("click", taskButtonHandler);
